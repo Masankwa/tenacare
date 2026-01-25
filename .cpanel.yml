@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DOCUMENT_ROOT=/home/tenacare/public_html
+    - /bin/cp -r * $DOCUMENT_ROOT
