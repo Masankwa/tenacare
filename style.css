@@ -1,0 +1,552 @@
+/* ================================
+   Lined Up Support - style.css
+   Full replacement to fix layout, card sizing,
+   responsive spacing, and additional section styling.
+================================ */
+
+/* ---------- Reset & Globals ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root{
+  --blue: #1A73E8;
+  --green: #00C389;
+  --bg: #f9fafb;
+  --muted: #57606a;
+  --card-bg: #ffffff;
+  --container-w: 1200px;
+  --radius: 14px;
+  --g-gradient: linear-gradient(135deg,var(--blue),var(--green));
+}
+
+html{ scroll-behavior: smooth; font-size: 16px; }
+body{
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: var(--bg);
+  color: #111827;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height: 1.45;
+  padding-top: 84px; /* reserve space for fixed header */
+}
+
+/* ---------- Layout container / gutters ---------- */
+.container{
+  width: calc(100% - 40px);
+  max-width: var(--container-w);
+  margin-inline: auto;
+  padding: 28px 20px;
+}
+
+/* Ensure sections don't span full viewport edge-to-edge */
+.section {
+  margin-inline: auto;
+  padding: 56px 0;
+}
+
+/* Make images safer inside content (no full-bleed unless intended) */
+img{ display:block; max-width:100%; height:auto; border-radius:12px; }
+
+/* ---------- Header / Nav ---------- */
+header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 72px;
+  z-index: 1200;
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 30px rgba(10,20,40,0.06);
+}
+
+.nav {
+  height: 72px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  justify-content:space-between;
+}
+
+.logo{ font-weight:700; font-size:1.2rem; color:var(--blue); }
+.logo span{ color:var(--green); margin-left:6px; font-weight:800; }
+
+/* Desktop links */
+.nav-links{
+  display:flex;
+  gap:20px;
+  align-items:center;
+  list-style:none;
+}
+.nav-links a{
+  text-decoration:none;
+  color:var(--muted);
+  font-weight:600;
+  padding:8px 10px;
+  border-radius:10px;
+  transition:all .18s ease;
+}
+.nav-links a:hover,
+.nav-links a:focus{ color:var(--blue); transform:translateY(-2px); }
+
+/* hamburger - hidden on desktop */
+.hamburger{ display:none; background:transparent; border:0; cursor:pointer; padding:8px; }
+
+/* ---------- Hero ---------- *//* ===========================
+   Redesigned Hero Image
+   Modern, centered, premium
+=========================== */
+
+.redesigned-hero-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    overflow: hidden;
+    border-radius: 22px;
+    box-shadow: 0 25px 60px rgba(0, 50, 120, 0.08);
+}
+
+.hero-main-img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    transition: 0.4s ease;
+}
+
+/* Subtle zoom hover */
+.hero-main-img:hover {
+    transform: scale(1.05);
+}
+
+/* Gradient overlay for premium feel */
+.hero-image-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.02),
+        rgba(0,0,0,0.15)
+    );
+    pointer-events: none;
+}
+
+/* ===========================
+   Modern Scroll Indicator
+=========================== */
+.scroll-indicator {
+    margin-top: -10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--blue);
+    font-weight: 600;
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+.scroll-dot {
+    width: 8px;
+    height: 14px;
+    border: 2px solid var(--blue);
+    border-radius: 20px;
+    position: relative;
+}
+
+.scroll-dot::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--blue);
+    border-radius: 50%;
+    animation: scrollAnim 1.4s infinite ease-in-out;
+}
+
+/* Smooth bouncing animation */
+@keyframes scrollAnim {
+    0% { opacity: 0; transform: translate(-50%, 0px); }
+    50% { opacity: 1; transform: translate(-50%, 6px); }
+    100% { opacity: 0; transform: translate(-50%, 14px); }
+}
+
+
+
+
+
+.hero {
+  background: linear-gradient(160deg, #eaf9ff 0%, #eefef6 100%);
+  padding: 48px 0 36px;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+  border-bottom-left-radius:22px;
+  border-bottom-right-radius:22px;
+}
+
+.hero-inner{
+  display:grid;
+  grid-template-columns: 1fr 480px;
+  gap:30px;
+  align-items:center;
+}
+
+/* limit hero content width so it doesn't hit edges */
+.hero-content{ max-width:700px; }
+
+.hero h1{
+  font-size:clamp(1.6rem,3.4vw,2.8rem);
+  line-height:1.12;
+  color:#0b3b66;
+  margin-bottom:12px;
+}
+.hero p{ color:var(--muted); font-size:1.02rem; max-width:56ch; }
+
+/* Buttons */
+.btn-primary, .btn-secondary{
+  display:inline-block;
+  padding:12px 20px;
+  border-radius:12px;
+  font-weight:700;
+  text-decoration:none;
+  border:0;
+  cursor:pointer;
+}
+.btn-primary{
+  background: var(--g-gradient);
+  color:white;
+  box-shadow: 0 12px 30px rgba(26,115,232,0.12);
+}
+.btn-secondary{
+  background:transparent;
+  color:var(--blue);
+  border:2px solid rgba(26,115,232,0.12);
+}
+
+/* hero image card — constrain so it doesn't span edge-to-edge */
+
+
+/* small scroll indicator */
+.scroll-indicator{ color:var(--blue); font-weight:600; }
+
+/* ---------- About ---------- */
+.about { display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center; }
+.about .about-img{ max-width:520px; margin-inline:auto; }
+.about-text h2{ font-size:1.6rem; color:#0b3b66; margin-bottom:10px; }
+.about-text p{ color:var(--muted); font-size:1.02rem; }
+
+/* ---------- Team ---------- */
+.team{ padding-top:12px; }
+.team h2{ text-align:center; font-size:1.5rem; color:#0b3b66; }
+.section-desc{ text-align:center; color:var(--muted); margin:8px auto 28px; max-width:720px; }
+
+.team-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap:20px;
+  margin-top:18px;
+}
+
+/* Ensure card images all have identical height and object-fit */
+.team-card{
+  background:var(--card-bg);
+  border-radius:16px;
+  padding:16px;
+  box-shadow: 0 8px 28px rgba(12,30,60,0.04);
+  transition: transform .22s ease, box-shadow .22s ease;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:center;
+}
+.team-card:hover{ transform:translateY(-8px); box-shadow:0 20px 60px rgba(12,40,90,0.06); }
+
+/* Fix inconsistent image sizes: set a uniform frame for avatars/photos */
+.team-card img{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover; /* critical to maintain consistent appearance */
+  box-shadow: 0 6px 20px rgba(10,30,60,0.06);
+}
+
+/* name text */
+.team-card h3{ font-size:1rem; color:#0b2e4a; text-align:center; }
+
+/* ---------- Services ---------- */
+.services{ padding-top:14px; }
+.services h2{ text-align:center; color:#0b3b66; margin-bottom:18px; }
+.services-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap:18px;
+}
+.service-card{
+  background:var(--card-bg);
+  padding:20px;
+  border-radius:14px;
+  text-align:center;
+  box-shadow: 0 10px 30px rgba(8,20,40,0.04);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.service-card:hover{ transform:translateY(-8px); box-shadow: 0 18px 50px rgba(8,30,60,0.06); }
+
+/* Ensure lucide icons scale nicely inside card */
+.service-card i{ width:44px; height:44px; color:var(--blue); margin-bottom:10px; }
+
+/* ---------- Supported Independent Living (SIL) ---------- */
+.sil-section{
+  margin-top:36px;
+  padding: 40px 0;
+  background: linear-gradient(180deg,#f7ffff, #f0fbf7);
+  border-radius:12px;
+}
+.sil-content{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:22px;
+  align-items:center;
+}
+.sil-text{ padding:12px 8px; }
+.sil-text h2{ font-size:1.35rem; color:#0b3b66; }
+.sil-text p{ color:var(--muted); margin:12px 0 18px; line-height:1.6; }
+
+/* Prevent CTA overlap: always flow below text on small screens; give margin on larger screens */
+.sil-text .btn-primary{ display:inline-block; margin-top:6px; }
+.sil-img{ max-width:520px; margin-inline:auto; }
+.sil-img img{ width:100%; height:320px; object-fit:cover; border-radius:12px; }
+
+/* ---------- Respite & Short Stays ---------- */
+.respite-section{ margin-top:46px; padding:28px 0; }
+.respite-content{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:20px;
+  align-items:center;
+}
+.respite-content img{ height:240px; object-fit:cover; }
+.respite-content p{ color:var(--muted); line-height:1.6; }
+
+/* ---------- Emergency Accommodation ---------- */
+.emergency-section{
+  margin-top:48px;
+  padding:30px 0;
+  text-align:center;
+  background: linear-gradient(180deg, rgba(255,244,244,0.8), #fff);
+  border-radius:12px;
+  border:1px solid rgba(240,200,200,0.25);
+}
+.emergency-section h2{ color:#b22222; margin-bottom:8px; }
+.emergency-section p{ color:var(--muted); max-width:800px; margin-inline:auto; }
+
+/* ---------- Group Activities ---------- */
+.group-section{ margin-top:46px; padding:26px 0; }
+.group-section img{ height:260px; object-fit:cover; border-radius:12px; margin-top:14px; }
+
+/* ---------- Community Participation ---------- */
+.community-section{ margin-top:46px; padding:26px 0; }
+.community-section img{ height:260px; object-fit:cover; border-radius:12px; margin-top:14px; }
+
+/* ---------- Testimonials (simple consistent style) ---------- */
+.testimonials {
+  margin-top:44px;
+}
+.testimonials .testimonials-wrap{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap:18px;
+  margin-top:18px;
+}
+.testimonial{
+  background: linear-gradient(180deg,#ffffff,#fbfffb);
+  padding:18px;
+  border-radius:12px;
+  box-shadow: 0 8px 30px rgba(8,20,40,0.04);
+}
+
+/* ---------- Contact ---------- */
+.contact{ margin-top:56px; padding-bottom:28px; }
+.contact h2{ color:#0b3b66; margin-bottom:10px; }
+.contact-form{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:12px;
+  background:var(--card-bg);
+  padding:18px;
+  border-radius:12px;
+  box-shadow: 0 12px 40px rgba(6,18,40,0.05);
+}
+.contact-form input, .contact-form textarea{
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid #e6eef6;
+  font-size:0.98rem;
+  color:#0b2e4a;
+}
+.contact-form textarea{ grid-column: 1 / -1; min-height:140px; resize:vertical; }
+.contact-form .btn-primary{ grid-column: 1 / -1; justify-self:start; margin-top:6px; }
+
+/* contact info area */
+.contact-info{ margin-top:12px; color:var(--muted); }
+
+/* ===============================
+   GROUP ACTIVITIES (REDESIGNED)
+================================ */
+.activities-section {
+    margin-top: 100px;
+}
+
+.activities-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    align-items: center;
+}
+
+.activities-text h2 {
+    font-size: 2rem;
+    color: #0d3b66;
+    margin-bottom: 10px;
+}
+
+.activities-text p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.activities-img img {
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+.activities-img img:hover {
+    transform: scale(1.02);
+}
+
+/* ===============================
+   COMMUNITY PARTICIPATION (REDESIGN)
+================================ */
+.community-section {
+    margin-top: 100px;
+}
+
+.community-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    align-items: center;
+}
+
+.community-text h2 {
+    font-size: 2rem;
+    color: #0d3b66;
+    margin-bottom: 10px;
+}
+
+.community-text p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.community-img img {
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+.community-img img:hover {
+    transform: scale(1.02);
+}
+
+/* ---------- Footer ---------- */
+.footer{
+  margin-top:56px;
+  padding:24px 0;
+  text-align:center;
+  background:#0b2746;
+  color:#fff;
+  border-radius:8px;
+}
+
+/* ---------- Scroll to top ---------- */
+.scroll-top{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:var(--g-gradient);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 12px 36px rgba(10,40,90,0.14);
+  cursor:pointer;
+  z-index:1400;
+  opacity:0;
+  transform:translateY(10px);
+  transition:all .28s ease;
+}
+.scroll-top.show{ opacity:1; transform:none; }
+
+/* ---------- Reveal animations ---------- */
+.reveal{ opacity:0; transform:translateY(24px); transition: all .7s cubic-bezier(.18,.9,.3,1); will-change: transform, opacity; }
+.reveal.active{ opacity:1; transform:none; }
+
+/* ---------- Responsive rules ---------- */
+@media (max-width: 980px){
+  .hero-inner{ grid-template-columns: 1fr; }
+  .sil-content{ grid-template-columns: 1fr; }
+  .about{ grid-template-columns: 1fr; }
+  .respite-content{ grid-template-columns: 1fr; }
+  .team-grid{ grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); }
+  .contact-form{ grid-template-columns: 1fr; }
+  header { height: 66px; }
+  body { padding-top: 72px; }
+}
+
+/* Mobile navigation panel */
+@media (max-width: 820px){
+  .nav-links{
+    position: fixed;
+    right: 0;
+    top: 72px;
+    width: 260px;
+    height: calc(100vh - 72px);
+    background: white;
+    flex-direction: column;
+    padding: 24px;
+    gap:16px;
+    box-shadow: -10px 6px 40px rgba(8,20,40,0.08);
+    transform: translateX(110%);
+    transition: transform .34s cubic-bezier(.18,.9,.3,1);
+    z-index:1300;
+  }
+  .nav-links.open{ transform: translateX(0%); }
+  .hamburger{ display:block; }
+  .nav-links a{ padding:12px 8px; border-radius:8px; }
+}
+
+/* smaller phones adjustments */
+@media (max-width: 420px){
+  .hero h1{ font-size:1.4rem; }
+  .hero p{ font-size:0.98rem; }
+  .team-card img{ width:96px; height:96px; }
+  .services-grid{ gap:12px; }
+}
+
+/* ---------- Utility helpers ---------- */
+.text-muted{ color:var(--muted); }
+.center{ text-align:center; }
+.mb-12{ margin-bottom:12px; }
+.p-12{ padding:12px; }
